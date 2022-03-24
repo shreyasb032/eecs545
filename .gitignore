@@ -2,10 +2,9 @@
 env
 server-env
 .idea
-lightning_logs
 runs
 *.profile
-checkpoints
+*.hdf5
 
 # dependencies
 /node_modules
@@ -155,5 +154,3 @@ dmypy.json
 .pyre/
 
 wandb
-data/
-data_backup/

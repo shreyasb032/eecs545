@@ -1,0 +1,7 @@
+python a2c_play.py --checkpoint=/home/shreyas/EECS545/wordle-rl/wordle-solver/deep_rl/lightning_logs/version_16/checkpoints/epoch=0-step=199999.ckpt --mode=evaluate
+Loading from checkpoint /home/shreyas/EECS545/wordle-rl/wordle-solver/deep_rl/lightning_logs/version_16/checkpoints/epoch=0-step=199999.ckpt ...
+Got env with 100 words!
+Evaluation mode
+Lost! HUMPH [('CRATE', 0), ('LYING', 0), ('FLOSS', 0), ('POUND', 0), ('POUND', 0), ('POUND', -10)]
+Lost! DIGIT [('CRATE', 0), ('STINK', 0), ('PRINT', 0), ('PRINT', 0), ('PRINT', 0), ('PRINT', -10)]
+Evaluation complete, won 0.98% and took 2.6122448979591835 guesses per win, 2.68 including losses.

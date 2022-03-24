@@ -1,0 +1,9 @@
+wandb: Run summary:
+wandb:    avg_winning_turns 3.79459
+wandb:          global_step 449950
+wandb:           lose_ratio 0.08075
+wandb:      reward_per_game 8.37267
+wandb:       reward_per_win 9.98649
+wandb:   total_games_played 6654113
+wandb:           train_loss 0.50798
+wandb:                 wins 740
