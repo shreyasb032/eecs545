@@ -1,6 +1,6 @@
 import fire
 
-import a2c.play
+import ppo.play
 
 
 def main(
@@ -8,7 +8,7 @@ def main(
         mode: str = 'goal',
 ):
     print("Loading from checkpoint", checkpoint, "...")
-    _, agent, env = a2c.play.load_from_checkpoint(checkpoint, evaluate=True)
+    _, agent, env = ppo.play.load_from_checkpoint(checkpoint, evaluate=True)
     print("Got env with", len(env.words), "words!")
 
     if mode == 'goal':
@@ -28,7 +28,7 @@ def suggest(agent, env):
         print("Alright, a new game!")
         word_masks = []
         while True:
-            guess = a2c.play.suggest(agent, env, word_masks)
+            guess = ppo.play.suggest(agent, env, word_masks)
             print(f"I suggest", guess)
             word_mask = input("<mask>, <word mask>, or done: ")
             if word_mask.lower() == 'done':
@@ -57,7 +57,7 @@ def goal(agent, env):
     while True:
         goal_word = input("Give me a goal word: ")
         try:
-            win, outcomes = a2c.play.goal(agent, env, goal_word)
+            win, outcomes = ppo.play.goal(agent, env, goal_word)
 
             i = 0
             for guess, reward in outcomes:
@@ -80,7 +80,7 @@ def evaluate(agent, env):
     n_win_guesses = 0
     N = env.allowable_words
     for goal_word in env.words[:N]:
-        win, outcomes = a2c.play.goal(agent, env, goal_word)
+        win, outcomes = ppo.play.goal(agent, env, goal_word)
         if win:
             n_wins += 1
             n_win_guesses += len(outcomes)

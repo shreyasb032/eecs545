@@ -1,28 +1,28 @@
 from typing import Tuple, List
 
 import wordle.state
-from a2c.agent import GreedyActorCriticAgent
-from a2c.module import AdvantageActorCritic
+from ppo.agent import GreedyActorCategorical
+from ppo.module import PPO
 from wordle.wordle import WordleEnvBase
 
 
 def load_from_checkpoint(
         checkpoint: str,
         evaluate: bool=True
-) -> Tuple[AdvantageActorCritic, GreedyActorCriticAgent, WordleEnvBase]:
+) -> Tuple[PPO, GreedyActorCategorical, WordleEnvBase]:
     """
     :param checkpoint:
     :return:
     """
-    model = AdvantageActorCritic.load_from_checkpoint(checkpoint, evaluate=evaluate)
-    agent = GreedyActorCriticAgent(model.net)
+    model = PPO.load_from_checkpoint(checkpoint, evaluate=evaluate)
+    agent = GreedyActorCategorical(model.net)
     env = model.env
 
     return model, agent, env
 
 
 def suggest(
-        agent: GreedyActorCriticAgent,
+        agent: GreedyActorCategorical,
         env: WordleEnvBase,
         sequence: List[Tuple[str, List[int]]],
 ) -> str:
@@ -47,7 +47,7 @@ def suggest(
 
 
 def goal(
-        agent: GreedyActorCriticAgent,
+        agent: GreedyActorCategorical,
         env: WordleEnvBase,
         goal_word: str,
 ) -> Tuple[bool, List[Tuple[str, int]]]:

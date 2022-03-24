@@ -2,7 +2,8 @@ from typing import List
 
 import numpy as np
 import torch
-
+from torch import nn
+from torch.distributions import Categorical
 
 class ActorCriticAgent:
     """Actor-Critic based agent that returns an action based on the networks policy."""
@@ -33,6 +34,26 @@ class ActorCriticAgent:
         ]
 
         return actions
+
+class ActorCategorical(nn.Module):
+    """Policy network, for discrete action spaces, which returns a distribution and an action given an
+    observation."""
+
+    def __init__(self, actor_net: nn.Module) -> None:
+        """
+        Args:
+            actor_net: neural network that predicts action probabilities given the env state
+        """
+        super().__init__()
+
+        self.actor_net = actor_net
+
+    def forward(self, states):
+        logits = self.actor_net(states)
+        pi = Categorical(logits=logits)
+        actions = pi.sample()
+
+        return pi, actions
 
 
 class GreedyActorCriticAgent:
